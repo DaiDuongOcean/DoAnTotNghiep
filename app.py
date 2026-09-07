@@ -15,7 +15,6 @@ st.set_page_config(
 )
 
 # --- CSS TÙY CHỈNH ---
-# Đã xóa các màu nền fix cứng (white, #f8f9fa) để Streamlit tự đổi màu theo Dark/Light Mode
 st.markdown("""
 <style>
     .stMetric [data-testid="stMetricValue"] { font-size: 2.5rem; text-align: center; }
@@ -23,6 +22,11 @@ st.markdown("""
     .risk-high { color: #ff4b4b; font-weight: bold; text-align: center; margin-top: -10px; margin-bottom: 20px;}
     .risk-low { color: #00c853; font-weight: bold; text-align: center; margin-top: -10px; margin-bottom: 20px;}
     html { scroll-behavior: smooth; }
+    
+    /* Ẩn dòng chữ "Press Enter to submit form" mặc định của Streamlit Form */
+    [data-testid="InputInstructions"] { 
+        display: none !important; 
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -234,7 +238,6 @@ else:
 
         if show_details:
             with st.expander("🔍 Chi tiết độ tin cậy từ các Mô hình (Ensemble AI)"):
-                # st.markdown("Hệ thống sử dụng **Ensemble Learning** kết hợp 3 mô hình dự đoán tiên tiến nhất hiện nay để đưa ra kết quả cuối cùng:")
                 d1, d2, d3 = st.columns(3)
                 d1.metric("XGBoost", f"{res['xgb']:.2%}")
                 d2.metric("LightGBM", f"{res['lgb']:.2%}")
